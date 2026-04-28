@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import useStore from '../services/store';
 
 const TimelinePage = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { timeline, fetchTimeline, incrementProgress } = useStore();
 
   useEffect(() => {
@@ -31,11 +31,10 @@ const TimelinePage = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight"
         >
-          Election <span className="gradient-text">Timeline</span>
+          {t('timeline.title_part1', { defaultValue: 'Election' })} <span className="gradient-text">{t('timeline.title_part2', { defaultValue: 'Timeline' })}</span>
         </motion.h1>
         <p className="text-base sm:text-xl text-surface-100/60 font-medium leading-relaxed max-w-2xl mx-auto">
-          The heartbeat of democracy. Stay synchronized with every critical milestone 
-          of the upcoming national elections.
+          {t('timeline.description')}
         </p>
       </div>
 

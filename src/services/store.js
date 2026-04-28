@@ -1,18 +1,14 @@
 import { create } from 'zustand';
 import i18n from '../i18n';
 import { dummyData } from '../data/dummyData';
+import { auth, db, googleProvider } from './firebase';
+import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
 
 /**
- * useStore - Centralized State Management Store
+ * useStore - Centralized State Management Store with Firebase Integration
  * 
- * Uses Zustand to manage global application state including:
- * - Voting process steps
- * - Election timeline
- * - FAQ data
- * - Simulation status
- * - User progress
- * 
- * Handles localization by mapping translations based on the current i18next language.
+ * Manages global state and provides real-time synchronization with Google Firebase.
  */
 const useStore = create((set, get) => ({
   process: [],
@@ -21,8 +17,52 @@ const useStore = create((set, get) => ({
   status: dummyData.status,
   loading: false,
   error: null,
-  progress: 0, // 0 to 100
+  progress: 0,
+  user: null,
 
+  // --- Authentication Actions ---
+  login: async () => {
+    try {
+      set({ loading: true });
+      const result = await signInWithPopup(auth, googleProvider);
+      set({ user: result.user, loading: false });
+    } catch (error) {
+      set({ error: error.message, loading: false });
+    }
+  },
+
+  logout: async () => {
+    try {
+      await signOut(auth);
+      set({ user: null });
+    } catch (error) {
+      set({ error: error.message });
+    }
+  },
+
+  initAuth: () => {
+    onAuthStateChanged(auth, (user) => {
+      set({ user });
+      if (user) {
+        // Subscribe to real-time status updates from Firestore for this user
+        const statusDoc = doc(db, 'simulation', 'global_status');
+        onSnapshot(statusDoc, (snapshot) => {
+          if (snapshot.exists()) {
+            const data = snapshot.data();
+            const lang = i18n.language;
+            set({ 
+              status: {
+                ...data,
+                displayPhase: dummyData.statusTranslations[data.currentPhase]?.[lang] || data.currentPhase
+              }
+            });
+          }
+        });
+      }
+    });
+  },
+
+  // --- Content Actions ---
   fetchProcess: () => {
     set({ loading: true });
     const lang = i18n.language;
@@ -57,14 +97,31 @@ const useStore = create((set, get) => ({
     set({ faqs: localizedFaqs, loading: false });
   },
 
-  fetchStatus: () => {
+  fetchStatus: async () => {
     const lang = i18n.language;
+    // Try to get from Firestore first
+    try {
+      const statusDoc = await getDoc(doc(db, 'simulation', 'global_status'));
+      if (statusDoc.exists()) {
+        const data = statusDoc.data();
+        set({ 
+          status: {
+            ...data,
+            displayPhase: dummyData.statusTranslations[data.currentPhase]?.[lang] || data.currentPhase
+          }
+        });
+        return;
+      }
+    } catch (e) {
+      console.error("Firestore fetch failed, falling back to dummy data", e);
+    }
+    
     const currentStatus = { ...dummyData.status };
     currentStatus.displayPhase = dummyData.statusTranslations[currentStatus.currentPhase]?.[lang] || currentStatus.currentPhase;
     set({ status: currentStatus });
   },
 
-  updateSimulation: (data) => {
+  updateSimulation: async (data) => {
     const lang = i18n.language;
     const newStatus = {
       ...get().status,
@@ -72,7 +129,22 @@ const useStore = create((set, get) => ({
       isVotingOpen: data.isVotingOpen,
       displayPhase: dummyData.statusTranslations[data.currentPhase]?.[lang] || data.currentPhase
     };
+    
     set({ status: newStatus });
+
+    // Persist to Firebase if authenticated
+    if (get().user) {
+      try {
+        await setDoc(doc(db, 'simulation', 'global_status'), {
+          currentPhase: data.currentPhase,
+          isVotingOpen: data.isVotingOpen,
+          updatedBy: get().user.email,
+          updatedAt: new Date().toISOString()
+        }, { merge: true });
+      } catch (e) {
+        console.error("Failed to persist to Firestore", e);
+      }
+    }
   },
 
   incrementProgress: (val) => {
