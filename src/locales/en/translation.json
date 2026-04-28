@@ -1,0 +1,133 @@
+{
+  "hero": {
+    "badge": "Empowering Democracy 2026",
+    "title_part1": "Your Voice is",
+    "title_part2": "Your Power.",
+    "description": "Navigating the democratic landscape shouldn't be a mystery. We've built the ultimate interactive guide to make your vote count.",
+    "start_journey": "Start Your Journey",
+    "view_guide": "View Voting Guide"
+  },
+  "stats": {
+    "inclusive": "100% Inclusive",
+    "live": "LIVE Updates",
+    "ai": "AI Help",
+    "easy": "EASY Info"
+  },
+  "features": {
+    "process": {
+      "title": "Interactive Process",
+      "description": "A step-by-step masterclass on how elections are conducted, from registration to results."
+    },
+    "timeline": {
+      "title": "Live Timeline",
+      "description": "The master clock of democracy. Never miss a registration deadline or polling day."
+    },
+    "support": {
+      "title": "Instant Support",
+      "description": "Have a specific doubt? Our AI-powered FAQ and chat assistant are here to help 24/7."
+    }
+  },
+  "banner": {
+    "title": "Ready to cast your vote?",
+    "description": "Get a visual walkthrough of the polling booth experience so you're ready for the big day.",
+    "button": "Launch Guide"
+  },
+  "faq": {
+    "title_part1": "Need",
+    "title_part2": "Answers?",
+    "description": "Everything you need to know about the voting process, eligibility, and booth details.",
+    "search_placeholder": "Search for questions...",
+    "no_results": "No results found for \"{{query}}\"",
+    "still_questions": "Still have questions?",
+    "assistant_desc": "Our AI-powered assistant is available 24/7 to help you with specific election details.",
+    "ask_assistant": "Ask Assistant"
+  },
+  "common": {
+    "dive_in": "Dive In"
+  },
+  "nav": {
+    "home": "Home",
+    "process": "Process",
+    "how_to_vote": "How to Vote",
+    "timeline": "Timeline",
+    "faqs": "FAQs"
+  },
+  "language": {
+    "select": "Select Language",
+    "en": "English",
+    "hi": "Hindi",
+    "gu": "Gujarati"
+  },
+  "guide": {
+    "title": "Booth Walkthrough",
+    "description": "First time voting? Don't worry! Here is a simple walkthrough of what happens once you enter the polling booth.",
+    "steps": {
+      "01": {
+        "title": "First Polling Officer",
+        "desc": "Show your Voter ID or any other approved ID card. They will check your name in the electoral roll and cross it out."
+      },
+      "02": {
+        "title": "Second Polling Officer",
+        "desc": "They will mark your left index finger with indelible ink, give you a slip, and ask for your signature in the register."
+      },
+      "03": {
+        "title": "Third Polling Officer",
+        "desc": "Hand over the slip to the third officer. They will then activate the EVM machine for you."
+      },
+      "04": {
+        "title": "At the EVM",
+        "desc": "Go inside the voting compartment. Press the blue button next to your chosen candidate's name or the NOTA button."
+      }
+    },
+    "dos": "Do's",
+    "dos_list": {
+      "1": "Carry a valid ID card (Voter ID, Aadhaar, etc.)",
+      "2": "Check your booth number in advance online",
+      "3": "Follow the instructions of the polling officers",
+      "4": "Wait for the 'beep' sound after pressing the EVM button"
+    },
+    "donts": "Don'ts",
+    "donts_list": {
+      "1": "Do not take your mobile phone inside the booth",
+      "2": "Do not disclose whom you voted for inside the booth",
+      "3": "Do not crowd or loiter around the polling station",
+      "4": "Do not try to vote more than once"
+    },
+    "required_docs": "Required Documents",
+    "docs_desc": "While Voter ID is the primary document, you can use any of these alternatives if your name is in the roll.",
+    "doc_note": "Ensure your document is in original form (physical or digital via DigiLocker as per guidelines)."
+  },
+  "admin": {
+    "title": "Admin Control",
+    "description": "Simulate real-time democratic shifts and system-wide state changes across the virtual infrastructure.",
+    "global_sim": "Global Simulation",
+    "voting_avail": "Voting Availability",
+    "lifecycle": "Lifecycle Transition",
+    "phases": {
+      "Announcement": "Announcement",
+      "Nominations": "Nominations",
+      "Campaigning": "Campaigning",
+      "Polling_Day": "Polling Day",
+      "Counting": "Counting & Results"
+    },
+    "monitor": "Monitor"
+  },
+  "layout": {
+    "progress_label": "Learning Path Progress",
+    "search_placeholder": "Search...",
+    "chat": {
+      "title": "Voter Assistant",
+      "placeholder": "Ask me anything...",
+      "initial_msg": "Hi! I'm your Election Assistant. How can I help you today?"
+    }
+  },
+  "footer": {
+    "desc": "Empowering every citizen with the knowledge to participate in the democratic process. Simple, transparent, and accessible election guidance for all.",
+    "nav_title": "Navigation",
+    "resources_title": "Official Resources",
+    "copyright": "© 2026 VoterHelp Interactive. Built for Democracy.",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "security": "Security"
+  }
+}

@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  /* User Requested Palette */
+  --color-primary: #5bc0be;
+  --color-primary-dark: #3a506b;
+  --color-secondary: #1c2541;
+  --color-accent: #5bc0be;
+  
+  --color-surface-900: #0b132b; /* Deep Dark */
+  --color-surface-800: #1c2541; /* Secondary Dark */
+  --color-surface-700: #3a506b; /* Muted Blue */
+  --color-surface-100: #ffffff; /* White Text */
+  --color-surface-50: #f8fafc;
+
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
+  --color-glass-highlight: rgba(255, 255, 255, 0.08);
+
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  --shadow-premium: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+  --shadow-glow: 0 0 20px rgba(91, 192, 190, 0.2);
+
+  /* Breakpoints */
+  --breakpoint-xs: 480px;
+
+  /* Animations */
+  @keyframes shimmer {
+    to { background-position: 200% center; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  --animate-shimmer: shimmer 4s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@layer base {
+  body {
+    @apply bg-surface-900 text-surface-100 min-h-screen font-sans selection:bg-primary/30;
+    font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(91, 192, 190, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(58, 80, 107, 0.1) 0px, transparent 50%);
+    background-attachment: fixed;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight text-white leading-tight mb-4;
+  }
+}
+
+@utility glass-card {
+  @apply bg-surface-800/40 backdrop-blur-xl border border-white/10 shadow-premium rounded-2xl overflow-hidden;
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 100%);
+}
+
+@utility glass-card-hover {
+  @apply glass-card hover:bg-surface-800/60 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-glow;
+}
+
+@layer components {
+  .container-wide {
+    @apply max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-surface-900 rounded-xl font-bold shadow-lg shadow-primary/10 
+           hover:brightness-110 hover:shadow-primary/30 transition-all duration-300 
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-surface-800 text-white rounded-xl font-bold shadow-lg 
+           hover:bg-surface-700 transition-all duration-300 
+           active:scale-95 flex items-center justify-center gap-2 border border-white/5;
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 border border-primary/30 text-primary rounded-xl font-bold 
+           hover:bg-primary/10 transition-all duration-300 active:scale-95 flex items-center justify-center gap-2;
+  }
+
+  .nav-link {
+    @apply text-surface-100/60 hover:text-white transition-colors relative py-2 flex items-center gap-2 whitespace-nowrap;
+  }
+
+  .nav-link-active {
+    @apply text-primary after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-white bg-[200%_auto] animate-shimmer;
+  }
+}
+
+/* Responsive Custom Spacing */
+@layer utilities {
+  .section-padding {
+    @apply py-8 sm:py-12 md:py-16 lg:py-24;
+  }
+  
+  .card-padding {
+    @apply p-4 sm:p-6 md:p-8;
+  }
+
+  .gap-responsive {
+    @apply gap-4 sm:gap-6 md:gap-8 lg:gap-12;
+  }
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full hover:bg-white/20 transition-colors;
+}
+
+/* TV & Ultra-wide optimizations */
+@media (min-width: 2000px) {
+  html {
+    font-size: 20px;
+  }
+}
+
