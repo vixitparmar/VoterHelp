@@ -2,6 +2,18 @@ import { create } from 'zustand';
 import i18n from '../i18n';
 import { dummyData } from '../data/dummyData';
 
+/**
+ * useStore - Centralized State Management Store
+ * 
+ * Uses Zustand to manage global application state including:
+ * - Voting process steps
+ * - Election timeline
+ * - FAQ data
+ * - Simulation status
+ * - User progress
+ * 
+ * Handles localization by mapping translations based on the current i18next language.
+ */
 const useStore = create((set, get) => ({
   process: [],
   timeline: [],

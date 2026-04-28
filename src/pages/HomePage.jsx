@@ -4,6 +4,16 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
+/**
+ * HomePage Component
+ * 
+ * The main landing page of the VoterHelp application.
+ * Features a hero section, key feature cards, and a quick-action banner.
+ * Uses Framer Motion for premium animations and Lucide icons for visual clarity.
+ * 
+ * @returns {JSX.Element} The rendered home page.
+ */
+
 const HomePage = () => {
   const { t } = useTranslation();
   return (
@@ -119,6 +129,20 @@ const HomePage = () => {
   );
 };
 
+/**
+ * HomeCard Component
+ * 
+ * A reusable card component for displaying features on the home page.
+ * Includes an icon, title, description, and a "Dive in" link.
+ * 
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.icon - The Lucide icon component to display
+ * @param {string} props.title - The title of the feature
+ * @param {string} props.description - A brief description of the feature
+ * @param {string} props.link - The destination path for the link
+ * @param {string} props.color - The background color class for the icon container
+ * @returns {JSX.Element} The rendered feature card.
+ */
 const HomeCard = ({ icon, title, description, link, color }) => {
   const { t } = useTranslation();
   return (

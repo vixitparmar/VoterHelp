@@ -4,6 +4,10 @@ import { UserPlus, ShieldCheck, Vote, Calculator, Trophy, ChevronRight, ChevronL
 import { useTranslation } from 'react-i18next';
 import useStore from '../services/store';
 
+/**
+ * iconMap maps icon names to their respective Lucide React components.
+ * @type {Object.<string, JSX.Element>}
+ */
 const iconMap = {
   UserPlus: <UserPlus className="w-8 h-8 sm:w-10 sm:h-10" />,
   ShieldCheck: <ShieldCheck className="w-8 h-8 sm:w-10 sm:h-10" />,
@@ -12,6 +16,15 @@ const iconMap = {
   Trophy: <Trophy className="w-8 h-8 sm:w-10 sm:h-10" />
 };
 
+/**
+ * ProcessPage Component
+ * 
+ * Displays the step-by-step journey of a voter.
+ * Integrates with a global store to fetch process details and track progress.
+ * Uses a modern stepper and AnimatePresence for smooth transitions between steps.
+ * 
+ * @returns {JSX.Element} The rendered process page.
+ */
 const ProcessPage = () => {
   const { i18n } = useTranslation();
   const { process, fetchProcess, incrementProgress } = useStore();
